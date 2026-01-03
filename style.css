@@ -1,0 +1,76 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    height: 100%;
+    width: 100%;
+    /* overflow: hidden; */
+}
+nav{
+    height: 70px;
+    width: 100%;
+    background-color: aliceblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+.main{
+    height: 600px;
+    width: 100%;
+    background-color: rgb(170, 135, 89);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.recipeleft{
+    height: 100%;
+    width: 30%;
+    overflow-y: scroll;
+    background-color: rgb(123, 126, 129);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+
+}
+.recipeleft img{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+.dish{
+    height: auto;
+    width: 100%;
+    display: flex;
+    
+    margin-bottom: 5px;
+}
+.dish .left{
+    height: 100%;
+    width: 20%;
+
+    
+}
+
+.dish .nameright{
+    height: 100%;
+    width: 80%;
+    font-size: small;
+}
+.main .right{
+    height: 100%;
+    width: 70%;
+    overflow-y: scroll;
+    background-color: rgb(89, 107, 107);
+    padding: 10px;
+
+}
+.button{
+    height: 100%;
+    width: 20%;
+    display: flex;
+    gap: 15px;
+}
