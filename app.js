@@ -5,15 +5,21 @@ let searchbtn = document.querySelector('#btn')
 
 searchbtn.addEventListener('click',()=>{
     let input = document.querySelector('input')
-console.log(input.value);
+// console.log(input.value);
+try{
+    
 fetch(`https://forkify-api.herokuapp.com/api/v2/recipes?search=${input.value}`).then((result)=>{
     return result.json()
 }).then((result)=>{
-    console.log(result);
+    // console.log(result);
 
     recipeUI(result)
     
 })
+}catch(error){
+    console.log(error);
+    
+}
 
 })
 
@@ -26,7 +32,7 @@ function recipeUI(res){
   let {recipes} =  data
   localrecipes.push(recipes)
 
-console.log(localrecipes);
+// console.log(localrecipes);
 localStorage.setItem('recipes',JSON.stringify(recipes))
 renderload()
 
@@ -54,9 +60,10 @@ function renderload(){
   });
 }
 recipeleft.addEventListener('click',(e)=>{
-    console.log('hehe');
+    // console.log('hehe');
     let elemId = e.target.parentElement.parentElement.id
-    fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${elemId}`).then((result)=>{
+  try{
+      fetch(`https://forkify-api.herokuapp.com/api/v2/recipes/${elemId}`).then((result)=>{
         return result.json()
     }).then((result)=>{
         console.log(result);
@@ -64,10 +71,14 @@ recipeleft.addEventListener('click',(e)=>{
         
         let {data} = result
         let {recipe} = data
-        console.log(recipe);
+        // console.log(recipe);
         localStorage.setItem('tareeqa',JSON.stringify(recipe))
         tareeqaUI()
     })
+  }catch(error){
+    console.log(error);
+    
+  }
     
 })
 let img = document.querySelector('#img')
