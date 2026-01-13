@@ -1,6 +1,6 @@
 console.log('javascript');
 
-let searchbtn = document.querySelector('#searchbtn')
+let searchbtn = document.querySelector('#btn')
 
 
 searchbtn.addEventListener('click',()=>{
@@ -38,7 +38,8 @@ function renderload(){
     let localrecipes =  JSON.parse(localStorage.getItem('recipes')) || []
 
      localrecipes.forEach((elem) => {
-   let {title,image_url,id} = elem
+   let {title,image_url,id,publisher} = elem
+   
     // console.log(elem);
     card = ` <div id="${id}" class="dish">
             <div class="left">
@@ -46,7 +47,7 @@ function renderload(){
             </div>
             <div class="nameright">
                 <p>${title}</p>
-                <p>a</p>
+                <p>${publisher}</p>
             </div>
         </div>`
         recipeleft.innerHTML += card
@@ -60,30 +61,34 @@ recipeleft.addEventListener('click',(e)=>{
     }).then((result)=>{
         console.log(result);
 
-        tareeqaUI(result)
         
+        let {data} = result
+        let {recipe} = data
+        console.log(recipe);
+        localStorage.setItem('tareeqa',JSON.stringify(recipe))
+        tareeqaUI()
     })
     
 })
 let img = document.querySelector('#img')
 let heading = document.querySelector('#title')
 let tareeqa = document.querySelector('#tareeqa')
-let li = ""
 
+tareeqaUI()
 function tareeqaUI(res){
-  let {data} = res
-  let {recipe} = data
-  let {title,image_url,ingredients} = recipe
+  let localtareeqa =  JSON.parse(localStorage.getItem('tareeqa'))
+   let {title,image_url,ingredients} = localtareeqa
 
-  console.log(image_url);
   
   img.src = image_url
     heading.textContent = title
 
-    ingredients.forEach((elem)=>{
+    ingredients.forEach((elem,idx)=>{
        let {description,quantity,unit} = elem
       let finalqty =  quantity ?? 0
-       li = `<li>${description}    ==>   ${finalqty}</li>`
-       tareeqa.innerHTML += li
+      let li = document.createElement('div')
+       li.innerHTML = `<div>${idx}- ${description} (${finalqty})</div>`
+       li.classList.add('divLi')
+       tareeqa.appendChild(li)
     })
 }
